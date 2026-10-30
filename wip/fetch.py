@@ -1,8 +1,12 @@
 """Fetch Bremen law from the Transparenzportal (www.transparenz.bremen.de) into .cache/.
 
     python -X utf8 fetch.py act <gsid>     # an act's Fassungen list, then the full text of every version
-Private (never published). One process, one request at a time, at least 2.5 s apart (robots.txt is empty), curl with
-a browser User-Agent, cached by the sha256 of the URL; stops on 403/429 or a challenge page.
+Private (never published). One process, one request at a time, at least 3 s apart (robots.txt is empty), curl with
+a browser User-Agent, cached by the sha256 of the URL; stops on 403/429 or a challenge page, on a 404 for an act page,
+and on an implausibly large version list (the portal-wide list served for an unknown gsid).
+
+2026-10-30 fix: an act's gsid is read from its own page (the index's "Vorschrift direkt aufrufen" link), never built
+from the index id: `bremen203.c.<index id>.de` is not a gsid (act page 404, Fassungen = all 8,933 portal versions).
 """
 import hashlib, html, json, re, subprocess, sys, time
 from pathlib import Path
@@ -22,7 +26,7 @@ def get(url: str) -> Path | None:
     out = cpath(url)
     if out.exists() and out.stat().st_size:
         return out
-    wait = 2.5 - (time.time() - _last[0])
+    wait = 3.0 - (time.time() - _last[0])
     if wait > 0:
         time.sleep(wait)
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -38,6 +42,9 @@ def get(url: str) -> Path | None:
     if code in (403, 429) or b'Just a moment' in body[:5000] or b'captcha' in body[:5000].lower():
         tmp.unlink(missing_ok=True)
         raise SystemExit(f'stop: {code} on {url}')
+    if code == 404 and 'template=20_gp_ifg_meta_detail_d' in url and '&ts=' not in url:
+        tmp.unlink(missing_ok=True)
+        raise SystemExit(f'stop: act page 404 on {url}')
     if code == 200 and body:
         tmp.replace(out)
         return out
@@ -67,9 +74,25 @@ def versions(gsid: str) -> list[tuple[str, str, str | None]]:
     return list(reversed(out))
 
 
+MAX_VERSIONS = 200
+MAX_SERIES = 30
+
+
+def guard(gsid: str):
+    """Stop before downloading a version list that cannot be one act's (the portal-wide list)."""
+    f = cpath(fassungen_url(gsid))
+    n, k = len(versions(gsid)), len(series_heads(gsid))
+    if n > MAX_VERSIONS or k > MAX_SERIES or f.stat().st_size > 1_000_000:
+        f.rename(f.with_suffix('.toolarge'))
+        raise SystemExit(f'stop: {gsid} lists {n} versions in {k} series ({f.stat().st_size if f.exists() else 0} '
+                         f'bytes): not one act')
+
+
 def act(gsid: str):
-    get(current_url(gsid))
+    if not get(current_url(gsid)):
+        raise SystemExit(f'stop: no act page for {gsid}')
     if get(fassungen_url(gsid)):
+        guard(gsid)
         for u, _, _ in versions(gsid):
             get(u)
 
@@ -98,9 +121,24 @@ INDEX = (BASE + '/vorschriften-72741?id=72743&gsid=kogis_tp_berlin01.c.60176.de&
          '&vorschriften%5B0%5D=Gesetze+und+Rechtsverordnungen&skip={skip}&max=50')
 
 
-def index_entries() -> list[tuple[str, str]]:
-    """(gsid, title) of every Stammgesetz on the cached index pages (amending acts and Verordnungen left out), in
-    index order."""
+GSID_LINK = re.compile(r'gsid=([A-Za-z0-9_.]+)&(?:amp;)?asl=bremen203_tpgesetz\.c\.55340\.de&(?:amp;)?template='
+                       r'20_gp_ifg_meta_(?:fassungen|historie)_d')
+
+
+def gsid_of(meta_url: str) -> str | None:
+    """The act's real gsid, from the Fassungen/Historie links on its own page (cached)."""
+    f = cpath(meta_url)
+    if not f.exists():
+        return None
+    ids = set(GSID_LINK.findall(f.read_text(encoding='utf-8', errors='replace')))
+    if len(ids) != 1:
+        raise SystemExit(f'stop: {meta_url} names {len(ids)} gsids {sorted(ids)[:5]}')
+    return ids.pop()
+
+
+def index_entries() -> list[tuple[str | None, str, str, str]]:
+    """(gsid or None if its page is not cached yet, title, index id, "Vorschrift direkt aufrufen" url) of every
+    Stammgesetz on the cached index pages (amending acts and Verordnungen left out), in index order."""
     out, seen = [], set()
     skip = 0
     while True:
@@ -108,23 +146,29 @@ def index_entries() -> list[tuple[str, str]]:
         if not f.exists():
             break
         s = f.read_text(encoding='utf-8', errors='replace')
-        found = 0
-        for m in re.finditer(r'<a[^>]*href="https://www\.transparenz\.bremen\.de/metainformationen/[^"]*?-(\d+)\?[^"]*"[^>]*>\s*Mehr', s):
-            pass
-        for h3 in re.findall(r'(?s)<li class="search-result-item" data-id="\d+">\s*<h2>(.*?)</h2>.*?href="https://www\.transparenz\.bremen\.de/metainformationen/[^"]*?-(\d+)(?:\?|")', s):
-            title = re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', '', h3[0]))).strip()
-            found += 1
-            gid = f'bremen203.c.{h3[1]}.de'
-            if gid in seen:
+        items = re.findall(r'(?s)<li class="search-result-item" data-id="(\d+)">\s*<h2>(.*?)</h2>(.*?)</li>', s)
+        for iid, h2, rest in items:
+            title = re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', '', h2))).strip()
+            if iid in seen:
                 continue
-            seen.add(gid)
-            if re.search(r'(?i)gesetz', title) and not re.match(r'(?i)^(w+ )?Ortsgesetz|^Ortsgesetz', title) and not re.match(r'(?i)^(\w+ )?(Gesetz|Verordnung) (zur|über die) (Änderung|Aufhebung)|^(Erste|Zweite|Dritte|Vierte|Fünfte)s? Gesetz zur Änderung|Verordnung', title) \
-                    and re.search(r'\([^()]*[A-Z][A-Za-zÄÖÜäöüß]*G[\w ]*\)', title):
-                out.append((gid, title))
-        if not found:
+            seen.add(iid)
+            if re.search(r'(?i)gesetz', title) and not re.match(r'(?i)^(w+ )?Ortsgesetz|^Ortsgesetz', title) and not re.match(r'(?i)^(\w+ )?(Gesetz|Verordnung) (zur|über die) (Änderung|Aufhebung)|^(Erste|Zweite|Dritte|Vierte|Fünfte)s? Gesetz zur Änderung|Verordnung', title)                     and re.search(r'\([^()]*[A-Z][A-Za-zÄÖÜäöüß]*G[\w ]*\)', title):
+                m = re.search(r'<a[^>]*href="([^"]+)"[^>]*>\s*<b>Vorschrift direkt aufrufen</b>', rest)
+                if not m:
+                    raise SystemExit(f'stop: index entry {iid} has no "Vorschrift direkt aufrufen" link')
+                meta = html.unescape(m.group(1))
+                out.append((gsid_of(meta), title, iid, meta))
+        if not items:
             break
         skip += 50
     return out
+
+
+def entry(meta_url: str) -> str:
+    """Fetch an act's own page from the index link; return its gsid."""
+    if not get(meta_url):
+        raise SystemExit(f'stop: no page for {meta_url}')
+    return gsid_of(meta_url)
 
 
 def index():
@@ -141,10 +185,11 @@ if __name__ == '__main__':
     if sys.argv[1] == 'index':
         index()
     elif sys.argv[1] == 'gesetze':
-        for n, (g, t) in enumerate(index_entries()[:int(sys.argv[2]) if sys.argv[2:] else None]):
+        for n, (g, t, iid, meta) in enumerate(index_entries()[:int(sys.argv[2]) if sys.argv[2:] else None]):
+            g = g or entry(meta)
             act(g)
             histories(g)
-            print(n, g, flush=True)
+            print(n, iid, g, len(versions(g)) if cpath(fassungen_url(g)).exists() else 0, t[:70], flush=True)
     elif sys.argv[1] == 'act':
         for g in sys.argv[2:]:
             act(g)

@@ -1,3 +1,4 @@
 20217
 28907
 49788 (Windows PID) fetch.py gesetze 100, started 10:47 UTC
+39704 (Windows PID) fetch.py gesetze 3 (test after gsid fix), started 12:14 UTC
