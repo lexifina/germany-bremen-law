@@ -1,0 +1,235 @@
+{
+ "country": "DE-HB",
+ "acts": [
+  {
+   "slug": "verfassung",
+   "short": "BremLV",
+   "title": "Landesverfassung der Freien Hansestadt Bremen in der Fassung der Bekanntmachung vom 12. August 2019",
+   "url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen203.c.232507.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+   "versions": [
+    {
+     "from": "1947-10-22",
+     "units": 157,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75060.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "84bd3e6b767525150e29536cd733fd47dc40561c41b651c7e8fdc64e849aabf6"
+    },
+    {
+     "from": "1949-01-01",
+     "units": 156,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75061.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "52d7f903a7882ea46a112fbe818c81f3f5a2a277586d5f48aa8c2ed3f4b84cd3"
+    },
+    {
+     "from": "1953-01-23",
+     "units": 156,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75062.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "08c0f794d58b2c892e12cd44e8f4839b3a1c9c4bd5ed40e774c9f419c57e3d36"
+    },
+    {
+     "from": "1960-04-05",
+     "units": 156,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75063.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "1eae1a33c7e923cc1819aab6edf8bf882e99a2c3e0c918990002a88d57584f2c"
+    },
+    {
+     "from": "1970-09-19",
+     "units": 156,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75064.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "e418905e4487c339938c76e45fc809c9aec306d7b387fa911d713b844b101a78"
+    },
+    {
+     "from": "1973-03-16",
+     "units": 156,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75065.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "6a822de4b236c83085e61f595a5970ca71aca87ec3dda1fb38ed9fd71512ef90"
+    },
+    {
+     "from": "1986-12-17",
+     "units": 157,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75066.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "9a81e1e8eeb38301b8885da82989ddacf9071a535741f8021bb8333cce055a22"
+    },
+    {
+     "from": "1987-10-13",
+     "units": 157,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75067.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "bcf27a631192b4257c38405e67addc3499b66ab4c6a6d455c7c59924d38fb432"
+    },
+    {
+     "from": "1994-11-01",
+     "units": 157,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75068.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "1bb7eb69084a79bc88aebfbbbc139976793bbebb996f348feeab2b29037ff845"
+    },
+    {
+     "from": "1994-11-08",
+     "units": 158,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75069.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "e4a1b184d26361b04a81eac12e2d6a3c7af74ef0861ded97fcf36e0be0d6cf9d"
+    },
+    {
+     "from": "1996-04-12",
+     "units": 158,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75070.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "5bd8839138896e09e0d9dd3993661535ce49f6599685c5f7511b1f3f871570f1"
+    },
+    {
+     "from": "1996-10-17",
+     "units": 158,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75071.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "b382523d8074877c53e4912d6f42ee62140bae477f1d1708ff8fab4d784e16d7"
+    },
+    {
+     "from": "1997-10-28",
+     "units": 159,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75072.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "ef030dd9e23ed6edb4caac2327eac68a2f4586d7ece37293582af2e69edb9e77"
+    },
+    {
+     "from": "1997-12-31",
+     "units": 160,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75073.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "565b52b4f601ca4fdc6e0f66977ee9bfad2af768c3972f682f18fde290af3ce9"
+    },
+    {
+     "from": "1998-03-14",
+     "units": 162,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75074.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "f0a8faba723c0e480eb9e7a869dbb6bc9c20fdc80e43b1edb900a07ecf935a34"
+    },
+    {
+     "from": "1999-06-16",
+     "units": 162,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75075.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "8ddff7622307d3bde0fa11c09795f6d95016c734a535d7e5b5ae49b876a6ac38"
+    },
+    {
+     "from": "2000-02-12",
+     "units": 162,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75076.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "16fcafc7a3618a6e70ea5996b9a86c55b8bd0c979e0eb01807ea07d9e017164d"
+    },
+    {
+     "from": "2001-09-14",
+     "units": 162,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75077.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "f9f920f0ef5336b40ab5081fa809261aac18795e1d64f66d82193b405523cbe1"
+    },
+    {
+     "from": "2003-04-23",
+     "units": 162,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75078.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "5c53b1c2b610a63009dce48300da1a00c7a6daf8b9205990499f8e31ccb3b541"
+    },
+    {
+     "from": "2005-06-07",
+     "units": 162,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75079.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "6bc81be438726f9fa427807b9f3fd659e6b679383207fdcb343e573b01cf2835"
+    },
+    {
+     "from": "2006-05-30",
+     "units": 162,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75080.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "23f0d5fc82e30b935fb495c964e3289ee96cbf5a32452f823a621da451a7b2cb"
+    },
+    {
+     "from": "2009-09-12",
+     "units": 162,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75081.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "159ca9fc51ad72e8b2767aa72b377062073c35df4194caaad0e5f5dfefa0de5f"
+    },
+    {
+     "from": "2010-09-14",
+     "units": 162,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75082.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "74a7b627bc1118ef4e66f51eec23aa0113551e4479e6f41f198bd311b0ef273d"
+    },
+    {
+     "from": "2011-06-08",
+     "units": 162,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75083.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "da85dd5a329a690459ff1cbc19a7c1d24649a094d9b92f09948082043f01c799"
+    },
+    {
+     "from": "2012-07-31",
+     "units": 162,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75084.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "356b863bb4f8c97fb075398335aab29a5e1a95a818348f12209e81df604ef4f4"
+    },
+    {
+     "from": "2013-09-13",
+     "units": 163,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75085.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "10ffa44191a7559aa561d9468be5b7cf50331e38178eba3fdf0e632db5bbcb40"
+    },
+    {
+     "from": "2013-09-14",
+     "units": 163,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75086.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "f9f9ab8dff961dd40a41ce80cfa2a93bdd82a0314f09428321ac51b89a93be9a"
+    },
+    {
+     "from": "2015-01-30",
+     "units": 165,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75087.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "c0f4609adc24d59b83c0aa910a55d269718bea0965540946adf47efe5e75f026"
+    },
+    {
+     "from": "2016-03-22",
+     "units": 165,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.75088.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "7a2557a8011b472edb22c4495ae814b42e8cb0d7b45c31f3b2b7cca55270ea29"
+    },
+    {
+     "from": "2016-12-22",
+     "units": 165,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.91677.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "5357218f8d952817a9f078847c4af2a974673eca2b86152f3f6109bd2748ad45"
+    },
+    {
+     "from": "2018-10-05",
+     "units": 165,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.121265.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "6af9c7934e9d60e3764447022c9d977ae487aa8135d68c66f751eece3bf38899"
+    },
+    {
+     "from": "2019-06-08",
+     "units": 166,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.136393.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "7dc12bf100f7b36ff4171f2efe6701cd18abd4d0f17b257d884d2782d562ad5e"
+    },
+    {
+     "from": "2020-06-24",
+     "units": 166,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.150860.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "dc13cef78dc4b9be6881796202730b6d65e5d593881fc29c222f10fa4d25eb56"
+    },
+    {
+     "from": "2020-12-30",
+     "units": 166,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.161138.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "3cd95b18af59b5f1d8926d452153c763483113010d6ee9c14d9882f6813cbf75"
+    },
+    {
+     "from": "2021-05-27",
+     "units": 166,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.167402.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "406b5ace3dfdac4596d980791da55cdea7cd4ba1daf6c7c4e5533ebcfee5c22a"
+    },
+    {
+     "from": "2023-03-21",
+     "units": 166,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen2014_tp.c.189922.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "c3363b9ca9c0f52390c9c6931f207acd80c3962b612306960ffccc4da900565e"
+    },
+    {
+     "from": "2024-06-25",
+     "units": 167,
+     "source_url": "https://www.transparenz.bremen.de/sixcms/detail.php?gsid=bremen203.c.232507.de&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_detail_d",
+     "sha256": "a24a8747b746a4f528e6e61071c8bb7e9dd4a195e26fe13167bd79b89a7d8c91"
+    }
+   ]
+  }
+ ]
+}
