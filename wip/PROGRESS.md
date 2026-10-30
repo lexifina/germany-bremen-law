@@ -1,11 +1,11 @@
 # Bremen (germany-bremen-law) - private
 
-State 2026-10-30 12:35 UTC (gitlaw-scraper-dell, Länder agent): FIXED. 49788 stopped by the coordinator; its 899 pages
+State 2026-10-30 12:21 UTC (gitlaw-scraper-dell, Länder agent): FIXED. 49788 stopped by the coordinator; its 899 pages
 quarantined in .cache/quarantine-2026-10-30-bad-gsid/. fetch.py now reads each act's gsid from its own page (index
 "Vorschrift direkt aufrufen" link: Fassungen/Historie links, else the PDF link bremen2014_tp.c.<id>.de), asks for
 Fassungen only when linked, stops on an act-page 404 or a list > 200 versions / 30 series / 1 MB; 3 s pace.
 parse.py: index_entries() gives (gsid|None, title, index id, url); slug fallback is the index id; complete() follows
-the page's own links; "Gültig ab" matched across the NBSP. Fetch PID 19704 `fetch.py gesetze` (161 acts) from 12:35.
+the page's own links; "Gültig ab" matched across the NBSP. Fetch PID 19704 `fetch.py gesetze` (161 acts) from 12:21.
 Parts: `python -X utf8 parse.py`, check_letters.py, local build + check.py, audit_push, then <part>.PUBLISH.
 
 Earlier state (superseded):
