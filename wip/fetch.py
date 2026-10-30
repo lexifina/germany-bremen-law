@@ -111,14 +111,14 @@ def index_entries() -> list[tuple[str, str]]:
         found = 0
         for m in re.finditer(r'<a[^>]*href="https://www\.transparenz\.bremen\.de/metainformationen/[^"]*?-(\d+)\?[^"]*"[^>]*>\s*Mehr', s):
             pass
-        for h3 in re.findall(r'(?s)<h3[^>]*>(.*?)</h3>.*?href="https://www\.transparenz\.bremen\.de/metainformationen/[^"]*?-(\d+)(?:\?|")', s):
+        for h3 in re.findall(r'(?s)<li class="search-result-item" data-id="\d+">\s*<h2>(.*?)</h2>.*?href="https://www\.transparenz\.bremen\.de/metainformationen/[^"]*?-(\d+)(?:\?|")', s):
             title = re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', '', h3[0]))).strip()
             found += 1
             gid = f'bremen203.c.{h3[1]}.de'
             if gid in seen:
                 continue
             seen.add(gid)
-            if re.search(r'(?i)gesetz', title) and not re.match(r'(?i)^(\w+ )?(Gesetz|Verordnung) (zur|über die) (Änderung|Aufhebung)|^(Erste|Zweite|Dritte|Vierte|Fünfte)s? Gesetz zur Änderung|Verordnung', title) \
+            if re.search(r'(?i)gesetz', title) and not re.match(r'(?i)^(w+ )?Ortsgesetz|^Ortsgesetz', title) and not re.match(r'(?i)^(\w+ )?(Gesetz|Verordnung) (zur|über die) (Änderung|Aufhebung)|^(Erste|Zweite|Dritte|Vierte|Fünfte)s? Gesetz zur Änderung|Verordnung', title) \
                     and re.search(r'\([^()]*[A-Z][A-Za-zÄÖÜäöüß]*G[\w ]*\)', title):
                 out.append((gid, title))
         if not found:

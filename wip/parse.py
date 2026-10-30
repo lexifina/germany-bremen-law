@@ -430,5 +430,36 @@ def write_part(name: str, acts_in: list[tuple[str, str, str]], country: bool) ->
         print('  ', p)
 
 
+PART_SIZE = 50
+
+
+def complete(gsid: str) -> bool:
+    if not fetch.cpath(fetch.current_url(gsid)).exists():
+        return False
+    if not fetch.cpath(fetch.fassungen_url(gsid)).exists():
+        return True  # no earlier versions page: current text only
+    return all(fetch.cpath(u).exists() for u, _, _ in fetch.versions(gsid)) and         all(fetch.cpath(fetch.historie_url(g)).exists() for g in fetch.series_heads(gsid))
+
+
+def abbrev(title: str) -> str | None:
+    m = re.search(r'\((?:[^()]*?[-–]\s*)?([A-ZÄÖÜ][\wÄÖÜäöüß./-]*)\)', title)
+    return m.group(1) if m and len(m.group(1)) < 30 else None
+
+
 if __name__ == '__main__':
     write_part('10-verfassung', [('bremen203.c.232507.de', 'verfassung', 'BremLV')], country=True)
+    entries = fetch.index_entries()
+    taken = {'verfassung'}
+    acts = []
+    for g, t in entries:
+        a = abbrev(t)
+        slug = re.sub(r'[^a-z0-9]+', '-', (a or g.split('.')[2]).lower().translate(str.maketrans('äöüß', 'aous'))).strip('-')
+        if slug in taken:
+            slug = f'{slug}-{g.split(".")[2]}'
+        taken.add(slug)
+        acts.append((g, slug, a or t[:60]))
+    for n in range(0, len(acts), PART_SIZE):
+        chunk = acts[n:n + PART_SIZE]
+        if not all(complete(g) for g, _, _ in chunk):
+            break
+        write_part(f'20-gesetze-{n // PART_SIZE + 1:02d}', chunk, country=False)
