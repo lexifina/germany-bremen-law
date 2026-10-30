@@ -304,7 +304,7 @@ def act_of(gsid: str, slug: str, short: str) -> tuple[dict | None, dict, list[st
     last_to = seq[-1][2] if seq else None
     cur_from = (dt.date.fromisoformat(last_to) + dt.timedelta(days=1)).isoformat() if last_to else None
     if cur_from is None:
-        g = re.search(r'Gültig ab:(?:\s|<[^>]+>)*(\d\d\.\d\d\.\d{4})', raw_cur)
+        g = re.search(r'Gültig(?:\s|&nbsp;)ab:(?:\s|<[^>]+>)*(\d\d\.\d\d\.\d{4})', raw_cur)  # \s takes the NBSP
         cur_from = de(g.group(1)) if g else None
     seq.append((fetch.current_url(gsid), cur_from, None))
     laws, problems, versions = {}, [], []
