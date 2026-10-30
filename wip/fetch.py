@@ -63,6 +63,8 @@ def current_url(gsid: str) -> str:
 def versions(gsid: str) -> list[tuple[str, str, str | None]]:
     """(url, valid from, valid to) for every earlier version listed, oldest first."""
     f = cpath(fassungen_url(gsid))
+    if not f.exists():
+        return []
     s = f.read_text(encoding='utf-8', errors='replace')
     out = []
     for href, body in re.findall(r'<a[^>]*href="([^"]*template=20_gp_ifg_meta_detail_d[^"]*)"[^>]*>(.*?)</a>', s, re.S):
@@ -91,7 +93,10 @@ def guard(gsid: str):
 def act(gsid: str):
     if not get(current_url(gsid)):
         raise SystemExit(f'stop: no act page for {gsid}')
-    if get(fassungen_url(gsid)):
+    has_f, _ = links(gsid)
+    if has_f:  # an act with no earlier versions has no Fassungen link; never ask for one (portal-wide list)
+        if not get(fassungen_url(gsid)):
+            raise SystemExit(f'stop: no Fassungen page for {gsid}')
         guard(gsid)
         for u, _, _ in versions(gsid):
             get(u)
@@ -103,7 +108,10 @@ def historie_url(gsid: str) -> str:
 
 def series_heads(gsid: str) -> list[str]:
     """The gsid of the newest version of each 'Gesamtausgabe' on the Fassungen page (the current one first)."""
-    s = cpath(fassungen_url(gsid)).read_text(encoding='utf-8', errors='replace')
+    f = cpath(fassungen_url(gsid))
+    if not f.exists():
+        return [gsid]
+    s = f.read_text(encoding='utf-8', errors='replace')
     out = [gsid]
     for sec in re.split(r'Frühere Fassungen der Gesamtausgabe', s)[2:]:
         m = re.search(r'gsid=([^&"]+)&[^"]*template=20_gp_ifg_meta_detail_d', sec)
@@ -113,6 +121,8 @@ def series_heads(gsid: str) -> list[str]:
 
 
 def histories(gsid: str):
+    if not any(links(gsid)):
+        return
     for g in series_heads(gsid):
         get(historie_url(g))
 
@@ -125,15 +135,27 @@ GSID_LINK = re.compile(r'gsid=([A-Za-z0-9_.]+)&(?:amp;)?asl=bremen203_tpgesetz\.
                        r'20_gp_ifg_meta_(?:fassungen|historie)_d')
 
 
+PDF_LINK = re.compile(r'gsid=([A-Za-z0-9_.]+)&(?:amp;)?template=00_html_to_pdf_d')
+
+
 def gsid_of(meta_url: str) -> str | None:
-    """The act's real gsid, from the Fassungen/Historie links on its own page (cached)."""
+    """The act's real gsid, read from its own page (cached): the gsid of its Fassungen/Historie links, or for an act
+    with neither (no earlier versions) the gsid of its PDF link."""
     f = cpath(meta_url)
     if not f.exists():
         return None
-    ids = set(GSID_LINK.findall(f.read_text(encoding='utf-8', errors='replace')))
+    s = f.read_text(encoding='utf-8', errors='replace')
+    ids = set(GSID_LINK.findall(s)) or set(PDF_LINK.findall(s))
     if len(ids) != 1:
         raise SystemExit(f'stop: {meta_url} names {len(ids)} gsids {sorted(ids)[:5]}')
     return ids.pop()
+
+
+def links(gsid: str) -> tuple[bool, bool]:
+    """(has a Fassungen link, has a Historie link) on the act's cached current page."""
+    s = cpath(current_url(gsid)).read_text(encoding='utf-8', errors='replace')
+    return (f'gsid={gsid}&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_fassungen_d' in s.replace('&amp;', '&'),
+            f'gsid={gsid}&asl=bremen203_tpgesetz.c.55340.de&template=20_gp_ifg_meta_historie_d' in s.replace('&amp;', '&'))
 
 
 def index_entries() -> list[tuple[str | None, str, str, str]]:

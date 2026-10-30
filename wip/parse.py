@@ -433,11 +433,14 @@ def write_part(name: str, acts_in: list[tuple[str, str, str]], country: bool) ->
 PART_SIZE = 50
 
 
-def complete(gsid: str) -> bool:
-    if not fetch.cpath(fetch.current_url(gsid)).exists():
+def complete(gsid: str | None) -> bool:
+    if not gsid or not fetch.cpath(fetch.current_url(gsid)).exists():
         return False
-    if not fetch.cpath(fetch.fassungen_url(gsid)).exists():
-        return True  # no earlier versions page: current text only
+    has_f, has_h = fetch.links(gsid)
+    if has_f and not fetch.cpath(fetch.fassungen_url(gsid)).exists():
+        return False
+    if not (has_f or has_h):
+        return True  # no earlier versions and no history: current text only
     return all(fetch.cpath(u).exists() for u, _, _ in fetch.versions(gsid)) and         all(fetch.cpath(fetch.historie_url(g)).exists() for g in fetch.series_heads(gsid))
 
 
@@ -451,11 +454,11 @@ if __name__ == '__main__':
     entries = fetch.index_entries()
     taken = {'verfassung'}
     acts = []
-    for g, t in entries:
+    for g, t, iid, _ in entries:  # g None until the act's own page is cached (complete() is then False)
         a = abbrev(t)
-        slug = re.sub(r'[^a-z0-9]+', '-', (a or g.split('.')[2]).lower().translate(str.maketrans('äöüß', 'aous'))).strip('-')
+        slug = re.sub(r'[^a-z0-9]+', '-', (a or iid).lower().translate(str.maketrans('äöüß', 'aous'))).strip('-')
         if slug in taken:
-            slug = f'{slug}-{g.split(".")[2]}'
+            slug = f'{slug}-{iid}'
         taken.add(slug)
         acts.append((g, slug, a or t[:60]))
     for n in range(0, len(acts), PART_SIZE):
