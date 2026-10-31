@@ -415,8 +415,9 @@ def write_part(name: str, acts_in: list[tuple[str, str, str]], country: bool, la
             acts.append(a)
             laws.update(lw)
     nv = sum(len(a['versions']) for a in acts)
-    # One law, one entry: a key another part already holds keeps that part's entry word for word.
-    for other in sorted(PARTS.glob('*.json')):
+    # One law, one entry: in a Verordnungen part, a key another part already holds keeps that part's entry word for
+    # word (the published Gesetze parts are left exactly as they were written).
+    for other in sorted(PARTS.glob('*.json')) if label_kind else []:
         if other.stem != name:
             for k, lw in json.loads(other.read_text(encoding='utf-8'))['laws'].items():
                 if k in laws:
