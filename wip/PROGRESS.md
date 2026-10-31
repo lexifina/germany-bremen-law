@@ -1,5 +1,27 @@
 # Bremen (germany-bremen-law) - private
 
+State 2026-10-31 07:20 UTC (gitlaw-scraper-dell, CLAIMED): Verordnungen fetching; parts published by the driver.
+- Fetch: `fetch.py verordnungen` (PID 34308, BelowNormal, from 05:47 UTC): the portal's list searched for "Verordnung"
+  (index pages cached, 28 pages), 644 Verordnungen by title (VO_TITLE, amending ones left out by VO_AMEND; "...ordnung"
+  titles such as Prüfungs-/Gebührenordnungen, Ortsgesetze and Gesetze not taken), each act in full; 3 s pace, same
+  guards as the Gesetze. About 40 s an act (~7 h). Log fetch-verordnungen.log. Restart with the same command (cached
+  pages are skipped; the index is re-read from the cache only if all pages are cached - index() asks again otherwise).
+- parse.py: `PARSE_OUT=<stage>/corpus.d python -X utf8 parse.py 30-verordnungen-NN` writes only the named parts (no
+  argument = all, as before). Verordnungen slugs: abbrev_vo() (abbreviation with 2+ capitals, else the one-word name in
+  the bracket, else "vo-<index id>"), taken after every Gesetz slug; amending acts labelled by kind ("Verordnung vom");
+  a law key another part holds keeps that part's entry (Verordnungen parts only). letters-differ.json (private, written
+  by the driver) leaves out versions whose parsed text differs from the page.
+  Regression: all five published parts re-parse byte-identical. 30-verordnungen-01 staged: 50 acts, 201 versions,
+  letters 0, local build check.py 0/0/0 (209 acts, 1,614 versions), audit [].
+- Driver: scripts/world-law/laender_vo_driver.py (PID 45548, both Länder, a pass every 10 min, BelowNormal, CPU gate):
+  parses the next unpublished parts into .tmp/vo-stage, publishes 5-10 at a time (fewer only at the end), letters check
+  (mismatches -> letters-differ.json, reparse), verify_parts_local, published parts byte-identical, then corpus.d +
+  .PUBLISH. Status VO-DRIVER.json, log vo-driver.log. On any failure it stops this Land and records why. When all 13
+  parts are published and the fetch has finished it deletes this Land's claim.
+- README: Verordnungen row + rule paragraph (counts come from REPRODUCE.md as parts land).
+
+Earlier state (superseded):
+
 State 2026-10-31 05:05 UTC (gitlaw-scraper-dell): Gesetze PUBLISHED, claim deleted. Fetch 19704 finished all 161
 index Stammgesetze. Parts 20-gesetze-01..04 (50/50/48/10 acts; 1,376 versions) verified (check_letters 0; local build
 159 acts / 1,413 versions, check.py 0/0/0; audit_push []) and published: main 2aff67d (verified rebuild, 1,853 tags).
