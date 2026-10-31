@@ -2,6 +2,53 @@
  "fetch": "running",
  "total_parts": 13,
  "published": 0,
- "waiting": "4 new parts ready; batch needs 5",
- "at": "2026-10-31T08:22:57Z"
+ "at": "2026-10-31T08:34:52Z",
+ "parts": {
+  "30-verordnungen-01": {
+   "acts": 50,
+   "versions": 201,
+   "left_out": 0
+  },
+  "30-verordnungen-02": {
+   "acts": 36,
+   "versions": 233,
+   "left_out": 14
+  },
+  "30-verordnungen-03": {
+   "acts": 36,
+   "versions": 191,
+   "left_out": 14
+  },
+  "30-verordnungen-04": {
+   "acts": 48,
+   "versions": 255,
+   "left_out": 2
+  },
+  "30-verordnungen-05": {
+   "acts": 50,
+   "versions": 227,
+   "left_out": 0
+  }
+ },
+ "last_batch": {
+  "at": "2026-10-31T08:34:52Z",
+  "parts": [
+   "30-verordnungen-01",
+   "30-verordnungen-02",
+   "30-verordnungen-03",
+   "30-verordnungen-04",
+   "30-verordnungen-05"
+  ],
+  "check": {
+   "acts": 379,
+   "versions": 2520,
+   "mismatches": 0,
+   "trailer_errors": 0,
+   "missing_in_force": 0,
+   "merges": 0,
+   "backwards": 0,
+   "future_dated": 0,
+   "corpus_sha256": "1753a0db130088f3d3bc5167559718cc27b73edc31fd3783f06c94c43c0514cf"
+  }
+ }
 }
