@@ -1,5 +1,13 @@
 # Bremen (germany-bremen-law) - private
 
+State 2026-10-31 05:05 UTC (gitlaw-scraper-dell): Gesetze PUBLISHED, claim deleted. Fetch 19704 finished all 161
+index Stammgesetze. Parts 20-gesetze-01..04 (50/50/48/10 acts; 1,376 versions) verified (check_letters 0; local build
+159 acts / 1,413 versions, check.py 0/0/0; audit_push []) and published: main 2aff67d (verified rebuild, 1,853 tags).
+Left out (in decisions): GrEStVG, BremBrexitÜG, BremFidatasG (no "Gültig ab" day on the page, never guessed); one BrBerG
+version (1964-06-30, not after 1987-10-15); RBG history entry "Gesetz vom 27.20.1998" (impossible date) not used for
+credits (parse.py now skips such entries). README updated (158 Gesetze; Verordnungen not yet).
+Next (not claimed): Verordnungen.
+
 State 2026-10-30 12:21 UTC (gitlaw-scraper-dell, Länder agent): FIXED. 49788 stopped by the coordinator; its 899 pages
 quarantined in .cache/quarantine-2026-10-30-bad-gsid/. fetch.py now reads each act's gsid from its own page (index
 "Vorschrift direkt aufrufen" link: Fassungen/Historie links, else the PDF link bremen2014_tp.c.<id>.de), asks for
