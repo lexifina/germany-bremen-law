@@ -253,6 +253,10 @@ def law_of(stand: str | None) -> tuple[str, dict] | None:
                  'restores': None, 'note': None}
 
 
+# Versions whose parsed text differs from the page (the letters check of a new part; written by the part driver,
+# private): source url -> reason. Left out rather than published with a difference.
+_LD = HERE / 'letters-differ.json'
+LETTERS_DIFFER = json.loads(_LD.read_text(encoding='utf-8')) if _LD.exists() else {}
 BAD_ENTRIES: list[str] = []
 # Label each amending instrument by its kind ("Verordnung vom ..."); the published Gesetze parts say "Gesetz vom"
 # for every one and stay as published, so this is set only for the Verordnungen parts.
@@ -340,6 +344,9 @@ def act_of(gsid: str, slug: str, short: str) -> tuple[dict | None, dict, list[st
         p = fetch.cpath(u)
         if not p.exists():
             problems.append(f'{title}: version from {frm} not retrieved')
+            continue
+        if re.sub(r'&ts=[^&]*', '', u) in LETTERS_DIFFER:
+            problems.append(f'{title}: version from {frm} left out: {LETTERS_DIFFER[re.sub(r"&ts=[^&]*", "", u)]}')
             continue
         raw = p.read_text(encoding='utf-8', errors='replace')
         own = re.search(r'<title>(.*?)</title>', raw, re.S)
