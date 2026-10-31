@@ -78784,7 +78784,7 @@
        "hb-gbl-1998-0267-19981027"
       ],
       "par-015": [
-       "hb-gbl-1998-0267-19982027"
+       "hb-gbl-1998-0267-19981027"
       ],
       "par-016": [
        "hb-gbl-1998-0267-19981027"
@@ -88289,17 +88289,6 @@
    "restores": null,
    "note": null
   },
-  "hb-gbl-1998-0267-19982027": {
-   "label": "Gesetz vom 27.20.1998 (Brem.GBl. 1998 S. 267)",
-   "title": "§ 15 geändert durch Artikel 2 Abs. 5 des Gesetzes vom 27.20.1998 (Brem.GBl. S. 267)",
-   "kind": "law",
-   "enacted": "1998-20-27",
-   "published": null,
-   "url": null,
-   "temporary_until": null,
-   "restores": null,
-   "note": null
-  },
   "hb-gbl-1998-0351-19981222": {
    "label": "Gesetz vom 22.12.1998 (Brem.GBl. 1998 S. 351)",
    "title": "§§ 1 und 10 geändert durch Artikel 3 des Gesetzes vom 22.12.1998 (Brem.GBl. S. 351)",
@@ -89714,7 +89703,8 @@
   "One file per Artikel or Paragraph; headings of Hauptteile and Abschnitte stand above the first provision under them. Numbered entries are one line each; tables are one line per row, cells separated by \" | \".",
   "Left out: Gesetz zur Verteilung des Aufkommens aus der Grunderwerbsteuer (Grunderwerbsteuerverteilungsgesetz - GrEStVG) vom 6. September 1983: a version has no date; left out",
   "Left out: Gesetz für den Übergangszeitraum nach dem Austritt des Vereinigten Königreichs Großbritannien und Nordirland aus der Europäischen Union (Bremisches Brexit-Übergangsgesetz - BremBrexitÜG) vom 29. Januar 2019: a version has no date; left out",
-  "Left out: Bremisches Rechtsbereinigungsgesetz (BrBerG) vom 12. Mai 1964: version from 1964-06-30 not after 1987-10-15; left out"
+  "Left out: Bremisches Rechtsbereinigungsgesetz (BrBerG) vom 12. Mai 1964: version from 1964-06-30 not after 1987-10-15; left out",
+  "Left out: Radio-Bremen-Gesetz (RBG) in der Fassung der Bekanntmachung vom 12. Januar 2021: Änderungshistorie entry with an impossible date not used for credits: \"§ 15 geändert durch Artikel 2 Abs. 5 des Gesetzes vom 27.20.1998 (Brem.GBl. S. 267)\""
  ],
  "ai_use": [
   "Claude Code (claude-opus-5-5) wrote Lexifina's code and chose the sources. No model output is used as legal text, dates or credits: every word, date and credit comes from the Transparenzportal Bremen pages."
