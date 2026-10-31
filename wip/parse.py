@@ -448,6 +448,11 @@ def write_part(name: str, acts_in: list[tuple[str, str, str]], country: bool, la
                'the change is labelled unexplained.',
                'One file per Artikel or Paragraph; headings of Hauptteile and Abschnitte stand above the first provision '
                'under them. Numbered entries are one line each; tables are one line per row, cells separated by " | ".']
+               + (['The Verordnungen are the entries of the portal's list of Gesetze und Rechtsverordnungen (searched '
+                   'for "Verordnung") whose title names a Verordnung, amending Verordnungen left out, in list order, 50 '
+                   'a part. Rechtsverordnungen titled otherwise ("...ordnung", Satzungen) are not included. Each '
+                   'amending act is labelled by its kind as the Änderungshistorie names it ("Verordnung vom ...").']
+                  if label_kind else [])
                + [f'Left out: {p}' for p in problems],
            'ai_use': ['Claude Code (claude-opus-5-5) wrote Lexifina\'s code and chose the sources. No model output is '
                       'used as legal text, dates or credits: every word, date and credit comes from the Transparenzportal '
