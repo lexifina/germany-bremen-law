@@ -14,6 +14,7 @@ import datetime as dt
 import hashlib
 import html
 import json
+import os
 import re
 import sys
 from html.parser import HTMLParser
@@ -24,6 +25,8 @@ sys.path.insert(0, str(HERE))
 import fetch  # noqa: E402  (cache paths and URLs only; no network here)
 
 RETRIEVED = '2026-10-30'
+# Where parts are written (a staging copy of corpus.d while parts are verified).
+PARTS = Path(os.environ.get('PARSE_OUT') or HERE / 'corpus.d')
 BASE = 'https://www.transparenz.bremen.de'
 
 COUNTRY = {
@@ -251,6 +254,9 @@ def law_of(stand: str | None) -> tuple[str, dict] | None:
 
 
 BAD_ENTRIES: list[str] = []
+# Label each amending instrument by its kind ("Verordnung vom ..."); the published Gesetze parts say "Gesetz vom"
+# for every one and stay as published, so this is set only for the Verordnungen parts.
+LABEL_KIND = False
 
 
 def history_entries(gsid: str) -> list[dict]:
@@ -267,10 +273,11 @@ def history_entries(gsid: str) -> list[dict]:
             continue
         for li in re.findall(r'(?s)<dd[^>]*>(.*?)</dd>', s[i:j]):
             t = norm(html.unescape(re.sub(r'<[^>]+>', ' ', li)))
-            m = re.search(r'(?:Gesetz(?:es)?|Verordnung|Bekanntmachung|Beschluss(?:es)?)\s+vom\s+(\d\d)\.(\d\d)\.(\d{4})\s*\(Brem\.?\s*GBl\.\s*(?:(\d{4})\s*)?S\.\s*(\d+)', t)
+            m = re.search(r'(Gesetz(?:es)?|Verordnung|Bekanntmachung|Beschluss(?:es)?)\s+vom\s+(\d\d)\.(\d\d)\.(\d{4})\s*\(Brem\.?\s*GBl\.\s*(?:(\d{4})\s*)?S\.\s*(\d+)', t)
             if not m or ' durch ' not in t:
                 continue
-            d, mo, y, gy, page = m.groups()
+            word, d, mo, y, gy, page = m.groups()
+            word = re.sub(r'(es)$', '', word) if word != 'Verordnung' else word
             try:
                 dt.date(int(y), int(mo), int(d))
             except ValueError:  # the portal's own typo (e.g. "27.20.1998"): never guessed, never credited
@@ -286,7 +293,7 @@ def history_entries(gsid: str) -> list[dict]:
                 continue
             out.append({'key': key, 'day': f'{y}-{mo}-{d}', 'nums': nums, 'all': 'mehrfach' in what,
                         'pre': bool(re.search(r'Präambel|Eingangsformel', what)), 'text': t,
-                        'law': {'label': f'Gesetz vom {int(d)}.{int(mo)}.{y} (Brem.GBl. {gy or y} S. {int(page)})',
+                        'law': {'label': f'{word if LABEL_KIND else "Gesetz"} vom {int(d)}.{int(mo)}.{y} (Brem.GBl. {gy or y} S. {int(page)})',
                                 'title': t, 'kind': 'law', 'enacted': f'{y}-{mo}-{d}', 'published': None, 'url': None,
                                 'temporary_until': None, 'restores': None, 'note': None}})
     return sorted(out, key=lambda e: e['day'])
@@ -397,7 +404,9 @@ def act_of(gsid: str, slug: str, short: str) -> tuple[dict | None, dict, list[st
     return act, laws, problems
 
 
-def write_part(name: str, acts_in: list[tuple[str, str, str]], country: bool) -> None:
+def write_part(name: str, acts_in: list[tuple[str, str, str]], country: bool, label_kind: bool = False) -> None:
+    global LABEL_KIND
+    LABEL_KIND = label_kind
     acts, laws, problems = [], {}, []
     for gsid, slug, short in acts_in:
         a, lw, pr = act_of(gsid, slug, short)
@@ -406,6 +415,12 @@ def write_part(name: str, acts_in: list[tuple[str, str, str]], country: bool) ->
             acts.append(a)
             laws.update(lw)
     nv = sum(len(a['versions']) for a in acts)
+    # One law, one entry: a key another part already holds keeps that part's entry word for word.
+    for other in sorted(PARTS.glob('*.json')):
+        if other.stem != name:
+            for k, lw in json.loads(other.read_text(encoding='utf-8'))['laws'].items():
+                if k in laws:
+                    laws[k] = lw
     out = {'acts': acts, 'laws': dict(sorted(laws.items())), 'applies': [],
            'sources': [{'name': 'Transparenzportal Bremen (Freie Hansestadt Bremen), Vorschriften: current and earlier '
                                 'versions of each act ("Frühere Fassungen")',
@@ -431,7 +446,7 @@ def write_part(name: str, acts_in: list[tuple[str, str, str]], country: bool) ->
                       'Bremen pages.']}
     if country:
         out['country'] = COUNTRY
-    d = HERE / 'corpus.d'
+    d = PARTS
     tmp = d / (name + '.json.tmp')
     tmp.write_text(json.dumps(out, ensure_ascii=False, indent=1) + '\n', encoding='utf-8', newline='\n')
     tmp.replace(d / (name + '.json'))
@@ -459,20 +474,40 @@ def abbrev(title: str) -> str | None:
     return m.group(1) if m and len(m.group(1)) < 30 else None
 
 
-if __name__ == '__main__':
-    write_part('10-verfassung', [('bremen203.c.232507.de', 'verfassung', 'BremLV')], country=True)
-    entries = fetch.index_entries()
-    taken = {'verfassung'}
-    acts = []
+def slugs_for(entries, taken: set, prefix: str = '') -> list[tuple[str | None, str, str]]:
+    out = []
     for g, t, iid, _ in entries:  # g None until the act's own page is cached (complete() is then False)
         a = abbrev(t)
-        slug = re.sub(r'[^a-z0-9]+', '-', (a or iid).lower().translate(str.maketrans('äöüß', 'aous'))).strip('-')
+        slug = re.sub(r'[^a-z0-9]+', '-', (a or prefix + iid).lower().translate(str.maketrans('äöüß', 'aous'))).strip('-')
         if slug in taken:
             slug = f'{slug}-{iid}'
         taken.add(slug)
-        acts.append((g, slug, a or t[:60]))
+        out.append((g, slug, a or t[:60]))
+    return out
+
+
+if __name__ == '__main__':
+    # python -X utf8 parse.py [<part> ...]: write only the named parts (all of them when none is named). A part is
+    # written only when every act in it is completely retrieved.
+    only = set(sys.argv[1:])
+    if not only or '10-verfassung' in only:
+        write_part('10-verfassung', [('bremen203.c.232507.de', 'verfassung', 'BremLV')], country=True)
+    taken = {'verfassung'}
+    acts = slugs_for(fetch.index_entries(), taken)
     for n in range(0, len(acts), PART_SIZE):
         chunk = acts[n:n + PART_SIZE]
+        name = f'20-gesetze-{n // PART_SIZE + 1:02d}'
         if not all(complete(g) for g, _, _ in chunk):
             break
-        write_part(f'20-gesetze-{n // PART_SIZE + 1:02d}', chunk, country=False)
+        if not only or name in only:
+            write_part(name, chunk, country=False)
+    # Verordnungen: slugs after every Gesetz's, so no Gesetz's slug ever changes; one without an abbreviation is
+    # "vo-<index id>".
+    vos = slugs_for(fetch.verordnung_entries(), taken, prefix='vo-')
+    for n in range(0, len(vos), PART_SIZE):
+        chunk = vos[n:n + PART_SIZE]
+        name = f'30-verordnungen-{n // PART_SIZE + 1:02d}'
+        if not all(complete(g) for g, _, _ in chunk):
+            break
+        if not only or name in only:
+            write_part(name, chunk, country=False, label_kind=True)
