@@ -1,8 +1,8 @@
 {
  "fetch": "running",
  "total_parts": 13,
- "published": 0,
- "at": "2026-10-31T08:34:52Z",
+ "published": 5,
+ "at": "2026-10-31T08:45:43Z",
  "parts": {
   "30-verordnungen-01": {
    "acts": 50,
@@ -50,5 +50,6 @@
    "future_dated": 0,
    "corpus_sha256": "1753a0db130088f3d3bc5167559718cc27b73edc31fd3783f06c94c43c0514cf"
   }
- }
+ },
+ "stopped": "PermissionError: [WinError 5] Access is denied: '~\\\\Documents\\\\lexifina\\\\scripts\\\\germany-bremen-law\\\\.tmp\\\\vo-stage\\\\.tmp-build\\\\repo\\\\.git\\\\objects\\\\pack\\\\pack-32614e1475ff88b156bcfbce7c47d4702c28572f.idx'"
 }
