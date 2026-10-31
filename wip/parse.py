@@ -474,10 +474,32 @@ def abbrev(title: str) -> str | None:
     return m.group(1) if m and len(m.group(1)) < 30 else None
 
 
+def abbrev_vo(title: str) -> str | None:
+    """A Verordnung's short name from the last bracket of its title: the abbreviation after " - " when it is one
+    (two or more capitals: "Schiedsstellenverordnung - SchStV"), else the bracket's own one-word name
+    ("Infektionshygiene-Verordnung"); never a reference such as "(EU)"."""
+    head = re.split(r'\s+(?:vom|in der Fassung)\s', title)[0]
+    for g in reversed(re.findall(r'\(([^()]*)\)', head)):
+        g = g.strip().rstrip(',')
+        if re.fullmatch(r'[A-Z]{1,7}', g) or re.match(r'\d', g):
+            continue
+        parts = re.split(r'\s+[-–,]\s+|\s*,\s+', g)
+        if len(parts) > 1 and sum(ch.isupper() for ch in parts[-1]) >= 2 and len(parts[-1]) < 30:
+            return parts[-1]
+        if ' ' not in g and len(g) < 60:
+            return g
+        if len(parts) > 1 and ' ' not in parts[-1] and sum(ch.isupper() for ch in parts[-1]) >= 2:
+            return parts[-1]
+        if len(g) < 50 and g.count(' ') <= 3:  # a short name of a few words ("Emissionserklärungsverordnung - Abwasser")
+            return g
+        return None
+    return None
+
+
 def slugs_for(entries, taken: set, prefix: str = '') -> list[tuple[str | None, str, str]]:
     out = []
     for g, t, iid, _ in entries:  # g None until the act's own page is cached (complete() is then False)
-        a = abbrev(t)
+        a = abbrev_vo(t) if prefix else abbrev(t)
         slug = re.sub(r'[^a-z0-9]+', '-', (a or prefix + iid).lower().translate(str.maketrans('äöüß', 'aous'))).strip('-')
         if slug in taken:
             slug = f'{slug}-{iid}'
