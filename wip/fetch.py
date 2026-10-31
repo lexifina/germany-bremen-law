@@ -193,10 +193,47 @@ def entry(meta_url: str) -> str:
     return gsid_of(meta_url)
 
 
-def index():
+INDEX_V = INDEX.replace('fulltext=Gesetz', 'fulltext=Verordnung')
+
+# A Verordnung by title: its first words name it one ("Verordnung", "Bremische Verordnung", "Polizeiverordnung",
+# "Landesverordnung ...", "Erste Verordnung zur Durchführung ..."); amending and repealing Verordnungen are left out.
+VO_TITLE = re.compile(r'^(?:[A-ZÄÖÜ][\wäöüß.-]*\s+){0,2}?[\wÄÖÜäöüß-]*[Vv]erordnung\b')
+VO_AMEND = re.compile(r'^(?:[\wÄÖÜäöüß.-]+\s+){0,3}?[\wÄÖÜäöüß-]*[Vv]erordnung\s+(?:zur|über die)\s+(?:Änderung|Aufhebung)'
+                      r'|^(?:[\wÄÖÜäöüß.-]+\s+){0,3}?Änderungsverordnung\b')
+
+
+def verordnung_entries() -> list[tuple[str | None, str, str, str]]:
+    """(gsid or None, title, index id, url) of every Verordnung (not amending ones) on the cached Verordnung index
+    pages, in index order."""
+    out, seen = [], set()
     skip = 0
     while True:
-        f = get(INDEX.format(skip=skip))
+        f = cpath(INDEX_V.format(skip=skip))
+        if not f.exists():
+            break
+        s = f.read_text(encoding='utf-8', errors='replace')
+        items = re.findall(r'(?s)<li class="search-result-item" data-id="(\d+)">\s*<h2>(.*?)</h2>(.*?)</li>', s)
+        for iid, h2, rest in items:
+            title = re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', '', h2))).strip()
+            if iid in seen:
+                continue
+            seen.add(iid)
+            if VO_TITLE.match(title) and not VO_AMEND.match(title):
+                m = re.search(r'<a[^>]*href="([^"]+)"[^>]*>\s*<b>Vorschrift direkt aufrufen</b>', rest)
+                if not m:
+                    raise SystemExit(f'stop: index entry {iid} has no "Vorschrift direkt aufrufen" link')
+                meta = html.unescape(m.group(1))
+                out.append((gsid_of(meta), title, iid, meta))
+        if not items:
+            break
+        skip += 50
+    return out
+
+
+def index(url: str = INDEX):
+    skip = 0
+    while True:
+        f = get(url.format(skip=skip))
         if not f or 'Vorschrift direkt aufrufen' not in f.read_text(encoding='utf-8', errors='replace'):
             break
         skip += 50
@@ -208,6 +245,13 @@ if __name__ == '__main__':
         index()
     elif sys.argv[1] == 'gesetze':
         for n, (g, t, iid, meta) in enumerate(index_entries()[:int(sys.argv[2]) if sys.argv[2:] else None]):
+            g = g or entry(meta)
+            act(g)
+            histories(g)
+            print(n, iid, g, len(versions(g)) if cpath(fassungen_url(g)).exists() else 0, t[:70], flush=True)
+    elif sys.argv[1] == 'verordnungen':
+        index(INDEX_V)
+        for n, (g, t, iid, meta) in enumerate(verordnung_entries()):
             g = g or entry(meta)
             act(g)
             histories(g)
