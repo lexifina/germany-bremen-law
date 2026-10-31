@@ -19,6 +19,11 @@ State 2026-10-31 07:20 UTC (gitlaw-scraper-dell, CLAIMED): Verordnungen fetching
   .PUBLISH. Status VO-DRIVER.json, log vo-driver.log. On any failure it stops this Land and records why. When all 13
   parts are published and the fetch has finished it deletes this Land's claim.
 - README: Verordnungen row + rule paragraph (counts come from REPRODUCE.md as parts land).
+- 08:35 UTC: driver published 30-verordnungen-01..05 (220 acts, 1,107 versions; 30 'Left out' lines, mostly expired
+  Verordnungen whose page gives no 'Gültig ab' day, e.g. Corona- and Zulassungszahlenverordnungen); letters 0; local
+  build 379 acts / 2,520 versions, check.py 0/0/0, audit []. autopush: main b59751a (verified rebuild 4069c62 ->
+  b59751a, lease, archived; 4069c62 itself was the docs-only rebuild of 2aff67d after the README edit, same parent
+  b6b208f). Remaining: parts 06-13 (fetch at ~260 of 644).
 
 Earlier state (superseded):
 
