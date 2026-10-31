@@ -250,6 +250,9 @@ def law_of(stand: str | None) -> tuple[str, dict] | None:
                  'restores': None, 'note': None}
 
 
+BAD_ENTRIES: list[str] = []
+
+
 def history_entries(gsid: str) -> list[dict]:
     """Every entry of the Änderungshistorie of each Gesamtausgabe: the provisions it names, its date and GBl page."""
     out = []
@@ -268,6 +271,11 @@ def history_entries(gsid: str) -> list[dict]:
             if not m or ' durch ' not in t:
                 continue
             d, mo, y, gy, page = m.groups()
+            try:
+                dt.date(int(y), int(mo), int(d))
+            except ValueError:  # the portal's own typo (e.g. "27.20.1998"): never guessed, never credited
+                BAD_ENTRIES.append(f'{gsid}: Änderungshistorie entry with an impossible date not used for credits: "{t}"')
+                continue
             what = t.split(' durch ', 1)[0]
             nums = set(re.findall(r'\b(\d+[a-z]?)\b', re.sub(r'Artikel \d+ des Gesetzes', '', what)))
             key = f'hb-gbl-{gy or y}-{int(page):04d}-{y}{mo}{d}'
@@ -309,7 +317,9 @@ def act_of(gsid: str, slug: str, short: str) -> tuple[dict | None, dict, list[st
     seq.append((fetch.current_url(gsid), cur_from, None))
     laws, problems, versions = {}, [], []
     prev_units = None
+    BAD_ENTRIES.clear()
     entries = history_entries(gsid)
+    problems += [b.replace(gsid + ':', title + ':', 1) for b in BAD_ENTRIES]
     used: set = set()
     prev_title = None
     heads = {}
