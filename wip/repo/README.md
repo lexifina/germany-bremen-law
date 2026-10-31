@@ -13,8 +13,11 @@ Every version of each act that the Transparenzportal Bremen lists under "Früher
 | Folder | Act | History |
 | --- | --- | --- |
 | `verfassung/` | Landesverfassung der Freien Hansestadt Bremen vom 21. Oktober 1947 (Neufassung vom 12. August 2019) | 37 versions, from 22 October 1947 to today |
+| one folder per act | 158 Gesetze: the Stammgesetze in the portal's list of Gesetze und Rechtsverordnungen (amending acts and Ortsgesetze left out) | 1,376 versions |
 
-Other Gesetze, Verordnungen and Verwaltungsvorschriften are not included yet.
+Of the 161 Stammgesetze in the portal's list, 3 are left out because their page gives no first day of validity
+(GrEStVG, BremBrexitÜG, BremFidatasG); a few single versions are left out too. They are listed under "Decisions made by hand" in
+REPRODUCE.md. Verordnungen and Verwaltungsvorschriften are not included yet.
 
 ## Source
 
