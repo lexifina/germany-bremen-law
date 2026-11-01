@@ -1,2 +1,3 @@
 2026-10-31T08:34:52Z published 30-verordnungen-01..30-verordnungen-05 (5 parts): 379 acts, 2520 versions in all
 2026-10-31T08:45:43Z STOPPED: PermissionError: [WinError 5] Access is denied: 'C:\\Users\\alany\\Documents\\lexifina\\scripts\\germany-bremen-law\\.tmp\\vo-stage\\.tmp-build\\repo\\.git\\objects\\pack\\pack-32614e1475ff88b156bcfbce7c47d4702c28572f.idx'
+2026-11-01T10:11:22Z STOPPED: verify not clean: {"ok": false, "check": {"acts": 567, "versions": 3240, "mismatches": 0, "trailer_errors": 0, "missing_in_force": 0, "merges": 0, "backwards": 0, "future_dated": 0, "corpus_sha256": "cfbdcab9153200779bdb0bb77ea8725d076bb86fa1c0ee3b2476d270e8320418"}, "audit": ["bot-challenge notes: brembitv/z-anlage-01.md"], "details": []}
