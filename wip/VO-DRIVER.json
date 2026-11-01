@@ -2,7 +2,7 @@
  "fetch": "finished",
  "total_parts": 13,
  "published": 5,
- "at": "2026-11-01T10:11:22Z",
+ "at": "2026-11-01T10:24:42Z",
  "parts": {
   "30-verordnungen-01": {
    "acts": 50,
@@ -28,27 +28,46 @@
    "acts": 50,
    "versions": 227,
    "left_out": 0
+  },
+  "30-verordnungen-06": {
+   "acts": 48,
+   "versions": 150,
+   "left_out": 2
+  },
+  "30-verordnungen-07": {
+   "acts": 49,
+   "versions": 203,
+   "left_out": 1
+  },
+  "30-verordnungen-08": {
+   "acts": 43,
+   "versions": 228,
+   "left_out": 7
+  },
+  "30-verordnungen-09": {
+   "acts": 48,
+   "versions": 139,
+   "left_out": 2
   }
  },
  "last_batch": {
-  "at": "2026-10-31T08:34:52Z",
+  "at": "2026-11-01T10:24:42Z",
   "parts": [
-   "30-verordnungen-01",
-   "30-verordnungen-02",
-   "30-verordnungen-03",
-   "30-verordnungen-04",
-   "30-verordnungen-05"
+   "30-verordnungen-06",
+   "30-verordnungen-07",
+   "30-verordnungen-08",
+   "30-verordnungen-09"
   ],
   "check": {
-   "acts": 379,
-   "versions": 2520,
+   "acts": 567,
+   "versions": 3240,
    "mismatches": 0,
    "trailer_errors": 0,
    "missing_in_force": 0,
    "merges": 0,
    "backwards": 0,
    "future_dated": 0,
-   "corpus_sha256": "1753a0db130088f3d3bc5167559718cc27b73edc31fd3783f06c94c43c0514cf"
+   "corpus_sha256": "cfbdcab9153200779bdb0bb77ea8725d076bb86fa1c0ee3b2476d270e8320418"
   }
  },
  "history": [
