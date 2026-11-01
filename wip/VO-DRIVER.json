@@ -2,7 +2,7 @@
  "fetch": "finished",
  "total_parts": 13,
  "published": 5,
- "at": "2026-11-01T10:24:42Z",
+ "at": "2026-11-01T10:34:16Z",
  "parts": {
   "30-verordnungen-01": {
    "acts": 50,
@@ -79,5 +79,6 @@
    "stopped": "verify not clean: {\"ok\": false, \"check\": {\"acts\": 567, \"versions\": 3240, \"mismatches\": 0, \"trailer_errors\": 0, \"missing_in_force\": 0, \"merges\": 0, \"backwards\": 0, \"future_dated\": 0, \"corpus_sha256\": \"cfbdcab9153200779bdb0bb77ea8725d076bb86fa1c0ee3b2476d270e8320418\"}, \"audit\": [\"bot-challenge notes: brembitv/z-anlage-01.md\"], \"details\": []}",
    "cleared": "2026-11-01T10:25Z: BremBITV CAPTCHA is law text; private.py law-file exemption"
   }
- ]
+ ],
+ "autopush_refused": "unchanged since 2026-11-01T10:32:12Z (NOT pushed: privacy audit found 1 in main: bot-challenge notes: brembitv/z-anlage-01.md 096242d8)"
 }
