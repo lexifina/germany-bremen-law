@@ -55,7 +55,10 @@
   {
    "stopped": "PermissionError: [WinError 5] Access is denied: '~\\\\Documents\\\\lexifina\\\\scripts\\\\germany-bremen-law\\\\.tmp\\\\vo-stage\\\\.tmp-build\\\\repo\\\\.git\\\\objects\\\\pack\\\\pack-32614e1475ff88b156bcfbce7c47d4702c28572f.idx'",
    "cleared": "2026-11-01 by gitlaw-scraper-dell after fixes"
+  },
+  {
+   "stopped": "verify not clean: {\"ok\": false, \"check\": {\"acts\": 567, \"versions\": 3240, \"mismatches\": 0, \"trailer_errors\": 0, \"missing_in_force\": 0, \"merges\": 0, \"backwards\": 0, \"future_dated\": 0, \"corpus_sha256\": \"cfbdcab9153200779bdb0bb77ea8725d076bb86fa1c0ee3b2476d270e8320418\"}, \"audit\": [\"bot-challenge notes: brembitv/z-anlage-01.md\"], \"details\": []}",
+   "cleared": "2026-11-01T10:25Z: BremBITV CAPTCHA is law text; private.py law-file exemption"
   }
- ],
- "stopped": "verify not clean: {\"ok\": false, \"check\": {\"acts\": 567, \"versions\": 3240, \"mismatches\": 0, \"trailer_errors\": 0, \"missing_in_force\": 0, \"merges\": 0, \"backwards\": 0, \"future_dated\": 0, \"corpus_sha256\": \"cfbdcab9153200779bdb0bb77ea8725d076bb86fa1c0ee3b2476d270e8320418\"}, \"audit\": [\"bot-challenge notes: brembitv/z-anlage-01.md\"], \"details\": []}"
+ ]
 }
