@@ -24,6 +24,14 @@ State 2026-10-31 07:20 UTC (gitlaw-scraper-dell, CLAIMED): Verordnungen fetching
   build 379 acts / 2,520 versions, check.py 0/0/0, audit []. autopush: main b59751a (verified rebuild 4069c62 ->
   b59751a, lease, archived; 4069c62 itself was the docs-only rebuild of 2aff67d after the README edit, same parent
   b6b208f). Remaining: parts 06-13 (fetch at ~260 of 644).
+- 2026-11-01: driver stop (08:45, read-only git pack in the reused stage) fixed: fresh vo-stage-<time> each pass,
+  read-only-safe rmtree; batches 2-4. Fetch 34308 FINISHED normally (all 644). 30-verordnungen-06..09 written with
+  PUBLISH (567 acts / 3,240 versions in all, check 0/0/0) but autopush REFUSED: 'bot-challenge notes:
+  brembitv/z-anlage-01.md' = BremBITV Anlage 1 law text ('alternative CAPTCHAs', 'Audio-CAPTCHA', WCAG). Fixed in
+  gitlaw_common/private.py (law files: the bare word CAPTCHA is not a bot-challenge marker; cloudflare / bot challenge /
+  firewall page still are; docs unchanged). autopush_dell (PID 55012, not mine) loaded the old rule in-process: it
+  must be restarted to push. Until then the driver holds Bremen (autopush_refused) and resumes by itself. Main still
+  b59751a. Parts 10-13 remain.
 
 Earlier state (superseded):
 
