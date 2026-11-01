@@ -6,3 +6,4 @@
 19704 (Windows PID) fetch.py gesetze (all 161, after gsid fix), started 12:21 UTC
 34308 fetch.py verordnungen started 2026-10-31T05:47:07Z (gitlaw-scraper-dell, BelowNormal)
 45548 laender_vo_driver.py (Verordnungen part driver, both Laender) started 2026-10-31T07:13:34Z (gitlaw-scraper-dell, BelowNormal)
+16920 laender_vo_driver.py restarted 2026-11-01T09:04:36Z (gitlaw-scraper-dell, BelowNormal; slug fix, fresh stage dirs, batches 2-4)
