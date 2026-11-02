@@ -2,7 +2,7 @@
  "fetch": "finished",
  "total_parts": 13,
  "published": 5,
- "at": "2026-11-02T21:49:50Z",
+ "at": "2026-11-02T21:59:51Z",
  "parts": {
   "30-verordnungen-01": {
    "acts": 50,
@@ -80,5 +80,5 @@
    "cleared": "2026-11-01T10:25Z: BremBITV CAPTCHA is law text; private.py law-file exemption"
   }
  ],
- "autopush_refused": "unchanged since 2026-11-02T20:41:10Z (NOT pushed: needs a rewrite the user has not approved (main b59751a01->096242d81: removes or re-dates published \"BremLV: oldest version available, 1947-10-22\" (1970-01-01) and 62 more (a correction) ( 096242d8)"
+ "autopush_refused": "NOT pushed: needs a rewrite the user has not approved (main b59751a01->096242d81: re-dates published \"BremLV: oldest version available, 1947-10-22\" (1970-01-01) and 62 more (needs a correction)); recorded in world-law/REWRITE-PENDING.json 096242d8"
 }
