@@ -1,8 +1,8 @@
 {
  "fetch": "finished",
  "total_parts": 13,
- "published": 5,
- "at": "2026-11-02T22:39:51Z",
+ "published": 13,
+ "at": "2026-11-03T00:20:04Z",
  "parts": {
   "30-verordnungen-01": {
    "acts": 50,
@@ -48,26 +48,46 @@
    "acts": 48,
    "versions": 139,
    "left_out": 2
+  },
+  "30-verordnungen-10": {
+   "acts": 39,
+   "versions": 182,
+   "left_out": 11
+  },
+  "30-verordnungen-11": {
+   "acts": 26,
+   "versions": 137,
+   "left_out": 26
+  },
+  "30-verordnungen-12": {
+   "acts": 25,
+   "versions": 132,
+   "left_out": 25
+  },
+  "30-verordnungen-13": {
+   "acts": 24,
+   "versions": 122,
+   "left_out": 20
   }
  },
  "last_batch": {
-  "at": "2026-11-01T10:24:42Z",
+  "at": "2026-11-03T00:17:21Z",
   "parts": [
-   "30-verordnungen-06",
-   "30-verordnungen-07",
-   "30-verordnungen-08",
-   "30-verordnungen-09"
+   "30-verordnungen-10",
+   "30-verordnungen-11",
+   "30-verordnungen-12",
+   "30-verordnungen-13"
   ],
   "check": {
-   "acts": 567,
-   "versions": 3240,
+   "acts": 681,
+   "versions": 3813,
    "mismatches": 0,
    "trailer_errors": 0,
    "missing_in_force": 0,
    "merges": 0,
    "backwards": 0,
    "future_dated": 0,
-   "corpus_sha256": "cfbdcab9153200779bdb0bb77ea8725d076bb86fa1c0ee3b2476d270e8320418"
+   "corpus_sha256": "b1631dc827bd65e49591fa078928b6778ad85e10fa0c173aa0a1a9675733130a"
   }
  },
  "history": [
@@ -80,5 +100,5 @@
    "cleared": "2026-11-01T10:25Z: BremBITV CAPTCHA is law text; private.py law-file exemption"
   }
  ],
- "autopush_refused": "unchanged since 2026-11-02T22:14:57Z (NOT pushed: needs a rewrite the user has not approved (main b59751a01->096242d81: re-dates published \"BremLV: oldest version available, 1947-10-22\" (1970-01-01) and 62 more (needs a correction)); reco 096242d8)"
+ "done": "2026-11-03T00:20:04Z"
 }
