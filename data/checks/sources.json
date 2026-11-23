@@ -1,0 +1,26 @@
+{
+ "sources": [
+  {
+   "id": "transparenz-bremen",
+   "kind": "legislation",
+   "name": {
+    "en": "Transparenzportal Bremen (Free Hanseatic City of Bremen)",
+    "de": "Transparenzportal Bremen (Freie Hansestadt Bremen)"
+   },
+   "url": "https://www.transparenz.bremen.de",
+   "reads": {
+    "en": "each held act's page and its list of Fassungen, a thirtieth of the held acts a day",
+    "de": "die Seite jeder Vorschrift hier und ihre Liste der Fassungen, täglich ein Dreißigstel der Vorschriften"
+   },
+   "folders": [
+    "<act>/"
+   ],
+   "schedule": "daily",
+   "state": "watched",
+   "corpora": [
+    "germany/bremen/acts"
+   ],
+   "interval": 3.0
+  }
+ ]
+}
