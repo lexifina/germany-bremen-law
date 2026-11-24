@@ -8,6 +8,6 @@ Wie global-law die Quellen jedes Landes beobachtet: [global-law WATCHING.md](htt
 
 | Quelle | Was gelesen wird | Ordner | Wie oft | Zuletzt gelesen | Stand |
 | --- | --- | --- | --- | --- | --- |
-| [Transparenzportal Bremen (Freie Hansestadt Bremen)](https://www.transparenz.bremen.de) | die Seite jeder Vorschrift hier und ihre Liste der Fassungen, täglich ein Dreißigstel der Vorschriften | `<act>/` | täglich | 2026-11-23 21:00 UTC | beobachtet |
+| [Transparenzportal Bremen (Freie Hansestadt Bremen)](https://www.transparenz.bremen.de) | die Seite jeder Vorschrift hier und ihre Liste der Fassungen, täglich ein Dreißigstel der Vorschriften | `<act>/` | täglich | 2026-11-24 00:12 UTC | beobachtet |
 
 Die Quellen werden im Rahmen ihrer robots.txt und Nutzungsbedingungen gelesen, mit Pausen zwischen den Anfragen.

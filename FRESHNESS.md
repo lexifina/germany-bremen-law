@@ -8,9 +8,9 @@ Wie global-law misst, wie aktuell jedes Land ist: [global-law FRESHNESS.md](http
 
 ### Transparenzportal Bremen (Freie Hansestadt Bremen) · `germany/bremen/acts`
 
-- Die amtliche Quelle zuletzt gelesen und jede Vorschrift hier mit ihr abgeglichen: **2026-11-23 21:08 UTC**.
+- Die amtliche Quelle zuletzt gelesen und jede Vorschrift hier mit ihr abgeglichen: **2026-11-24 00:19 UTC**.
 - Vorschriften hier: 681; aktuell gegenüber der Quelle: 681; an der Quelle geändert seit der Fassung hier: 0; nicht mehr an der Quelle: 0.
-- In diesem Lesen mit der Quelle verglichen: 87 der 681 Vorschriften hier; die übrigen wurden in diesem Lesen nicht verglichen (siehe die Anmerkung der Prüfung).
-- Nicht veröffentlicht: 353 (neu an der Quelle, hier noch nicht veröffentlicht: 280, von einer Prüfung zurückgehalten: 73); ohne Grund: 0.
+- In diesem Lesen mit der Quelle verglichen: 86 der 681 Vorschriften hier; die übrigen wurden in diesem Lesen nicht verglichen (siehe die Anmerkung der Prüfung).
+- Nicht veröffentlicht: 408 (neu an der Quelle, hier noch nicht veröffentlicht: 288, von einer Prüfung zurückgehalten: 120); ohne Grund: 0.
 
 Im Einzelnen: [monitoring/](monitoring/README.md). Für Programme: [data/checks/latest.json](data/checks/latest.json).
