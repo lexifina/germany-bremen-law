@@ -8,9 +8,9 @@ How global-law measures how current every country is: [global-law FRESHNESS.md](
 
 ### Transparenzportal Bremen (Free Hanseatic City of Bremen) · `germany/bremen/acts`
 
-- The official source last read and every act held here checked against it: **2026-11-26 07:49 UTC**.
+- The official source last read and every act held here checked against it: **2026-11-27 07:46 UTC**.
 - Acts held here: 681; current at the source: 681; changed at the source since the version held here: 0; no longer at the source: 0.
-- Compared with the source in this read: 86 of the 681 acts held here; the others were not compared in this read (see the check's note).
-- Not published: 330 (new at the source, not published here yet: 225, held by a check: 105); with no reason: 0.
+- Compared with the source in this read: 87 of the 681 acts held here; the others were not compared in this read (see the check's note).
+- Not published: 377 (new at the source, not published here yet: 267, held by a check: 110); with no reason: 0.
 
 In detail: [monitoring/](monitoring/README.en.md). For programs: [data/checks/latest.json](data/checks/latest.json).

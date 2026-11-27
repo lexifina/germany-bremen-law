@@ -8,6 +8,6 @@ How global-law watches every country's sources: [global-law WATCHING.md](https:/
 
 | Source | What is read | Folders | How often | Last read | State |
 | --- | --- | --- | --- | --- | --- |
-| [Transparenzportal Bremen (Free Hanseatic City of Bremen)](https://www.transparenz.bremen.de) | each held act's page and its list of Fassungen, a thirtieth of the held acts a day | `<act>/` | daily | 2026-11-26 07:41 UTC | watched |
+| [Transparenzportal Bremen (Free Hanseatic City of Bremen)](https://www.transparenz.bremen.de) | each held act's page and its list of Fassungen, a thirtieth of the held acts a day | `<act>/` | daily | 2026-11-27 07:38 UTC | watched |
 
 Sources are read within their robots.txt and terms, with pauses between requests.
