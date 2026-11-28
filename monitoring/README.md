@@ -6,18 +6,22 @@
 
 Wie global-law jedes Land beobachtet: [global-law monitoring/](https://github.com/lexifina/global-law/tree/main/monitoring). Diese Seite zeigt dasselbe nur für Bremen: jedes Lesen einer amtlichen Quelle, wann, und was daraus folgte (Vorschriften hinzugefügt, geändert und entfernt). Maschinenlesbar in [data/checks/](../data/checks/) (JSON Lines, Schema `lexifina-check/1`), in `git log` als Commits mit `Kind: check` und Monat für Monat in [checks/](checks/).
 
-**Letzte Prüfung:** 2026-11-27 07:46 UTC, Transparenzportal Bremen (Freie Hansestadt Bremen): 160 Adressen gelesen; 23 hinzugefügt, 0 geändert, 0 entfernt; Änderungen gefunden; 377 nicht veröffentlicht, davon 0 ohne Grund.
+**Letzte Prüfung:** 2026-11-28 09:48 UTC, Transparenzportal Bremen (Freie Hansestadt Bremen): 160 Adressen gelesen; 22 hinzugefügt, 0 geändert, 0 entfernt; Änderungen gefunden; 339 nicht veröffentlicht, davon 0 ohne Grund.
 
 ## Quellen
 
 | Quelle | Ordner | Wie oft | Letzte erfolgreiche Prüfung | Letztes Ergebnis | Stand |
 | --- | --- | --- | --- | --- | --- |
-| [Transparenzportal Bremen (Freie Hansestadt Bremen)](https://www.transparenz.bremen.de) | `<act>/` | täglich | 2026-11-27 07:46 UTC | Änderungen gefunden | beobachtet |
+| [Transparenzportal Bremen (Freie Hansestadt Bremen)](https://www.transparenz.bremen.de) | `<act>/` | täglich | 2026-11-28 09:48 UTC | Änderungen gefunden | beobachtet |
 
 ## Die letzten 30 Tage
 
 | Beginn (UTC) | Quelle | Gelesen | Hinzugefügt | Geändert | Entfernt | Nicht veröffentlicht (ohne Grund) | Ergebnis | Commits |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | --- | ---: |
+| [2026-11-28 09:40](checks/2026-11.md#de-transparenz-bremen-20261128t094057z) | transparenz-bremen | 160 | 22 | 0 | 0 | 339 (0) | Änderungen gefunden | — |
+| [2026-11-28 08:02](checks/2026-11.md#de-transparenz-bremen-20261128t080249z) | transparenz-bremen | 0 | 0 | 0 | 0 | 0 (0) | die Prüfung ist fehlgeschlagen | — |
+| [2026-11-28 07:02](checks/2026-11.md#de-transparenz-bremen-20261128t070249z) | transparenz-bremen | 0 | 0 | 0 | 0 | 0 (0) | die Prüfung ist fehlgeschlagen | — |
+| [2026-11-28 06:46](checks/2026-11.md#de-transparenz-bremen-20261128t064601z) | transparenz-bremen | 0 | 0 | 0 | 0 | 0 (0) | die Prüfung ist fehlgeschlagen | — |
 | [2026-11-27 07:38](checks/2026-11.md#de-transparenz-bremen-20261127t073851z) | transparenz-bremen | 160 | 23 | 0 | 0 | 377 (0) | Änderungen gefunden | — |
 | [2026-11-26 07:41](checks/2026-11.md#de-transparenz-bremen-20261126t074127z) | transparenz-bremen | 159 | 25 | 0 | 0 | 330 (0) | Änderungen gefunden | — |
 | [2026-11-25 07:38](checks/2026-11.md#de-transparenz-bremen-20261125t073802z) | transparenz-bremen | 143 | 24 | 0 | 0 | 239 (0) | Änderungen gefunden | — |
